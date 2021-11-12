@@ -2,7 +2,7 @@ package com.kalanco;
 
 import java.awt.*;
 
-public class Triangle {
+public class Triangle extends Figure{
     public Point v1, v2, v3;
     public Color color;
 
@@ -30,19 +30,32 @@ public class Triangle {
         this.v3.x += dx;
         this.v3.y += dy;
     }
-    public void setColor(Color c){
-        this.color = c;
-    }
     public double getSurface(){
-        double p = (Math.sqrt(v1.x - v2.x) * (v1.x - v2.x) + (v1.y - v2.y) * (v1.y - v2.y) +
-                Math.sqrt(v2.x - v3.x) * (v2.x - v3.x) + (v2.y - v3.y) * (v2.y - v3.y) +
-                Math.sqrt(v3.x - v1.x) * (v3.x - v1.x) + (v3.y - v1.y) * (v3.y - v1.y)) / 2;
-        return Math.sqrt(p *
-                (p - Math.sqrt(v1.x - v2.x) * (v1.x - v2.x) + (v1.y - v2.y) * (v1.y - v2.y)) *
-                (p - Math.sqrt(v2.x - v3.x) * (v2.x - v3.x) + (v2.y - v3.y) * (v2.y - v3.y)) *
-                (p - Math.sqrt(v3.x - v1.x) * (v3.x - v1.x) + (v3.y - v1.y) * (v3.y - v1.y)));
+        double p = (v1.distanceTo(v2) + v2.distanceTo(v3) + v3.distanceTo(v1)) / 2;
+        return Math.sqrt(p * (p - v1.distanceTo(v2)) * (p - v2.distanceTo(v3)) * (p - v3.distanceTo(v1)));
     }
     public double getPerimeter(){
-        return Math.abs(v1.x - v2.x) + Math.abs(v2.x - v3.x) + Math.abs(v3.y - v1.y);
+        return v1.distanceTo(v2) + v2.distanceTo(v3) + v3.distanceTo(v1);
+    }
+    public boolean isIsoceles(){
+        return (v1.distanceTo(v2) == v1.distanceTo(v3)) ||
+                (v2.distanceTo(v3) == v2.distanceTo(v1)) ||
+                (v3.distanceTo(v1) == v3.distanceTo(v2));
+    }
+    public boolean estEquilateral(){
+        return v1.distanceTo(v2) == v2.distanceTo(v3) &&
+                v1.distanceTo(v2) == v1.distanceTo(v3);
+    }
+    public boolean isRectangle(){
+        double ab = v1.distanceTo(v2);
+        double bc = v1.distanceTo(v3);
+        double ca = v2.distanceTo(v3);
+        if (ab > bc && ab > ca){
+            return bc * bc + ca * ca == ab * ab;
+        }
+        if (bc > ab && bc > ca){
+            return ab * ab + ca * ca == bc * bc;
+        }
+        return bc * bc + ab * ab == ca * ca;
     }
 }

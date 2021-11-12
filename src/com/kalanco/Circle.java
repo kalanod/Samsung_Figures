@@ -2,7 +2,7 @@ package com.kalanco;
 
 import java.awt.*;
 
-public class Circle {
+public class Circle extends Figure{
     public Point center;
     public double radius;
     public Color color;
@@ -24,9 +24,7 @@ public class Circle {
         this.center.x += dx;
         this.center.y += dy;
     }
-    public void setColor(Color c){
-        this.color = c;
-    }
+
     public double getSurface(){
         return Math.PI * (this.radius * this.radius);
     }

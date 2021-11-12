@@ -2,13 +2,12 @@ package com.kalanco;
 
 import java.awt.*;
 
-public class Ractangle {
+public class Rectangle extends Figure{
     public Point v;
-    public double edgeX;
-    public double edgeY;
+    public double edgeX, edgeY;
     public Color color;
 
-    public Ractangle(Point v, double edgeX, double edgeY) {
+    public Rectangle(Point v, double edgeX, double edgeY) {
         this.v = v;
         this.edgeX = edgeX;
         this.edgeY = edgeY;
@@ -28,9 +27,8 @@ public class Ractangle {
         this.edgeX += dx;
         this.edgeY += dy;
     }
-    public void setColor(Color c){
-        this.color = c;
-    }
+
+
     public double getSurface(){
         return (Math.abs(this.v.x - this.edgeX)
                 * Math.abs(this.v.y - this.edgeY));

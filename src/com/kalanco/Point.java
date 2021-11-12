@@ -2,10 +2,11 @@ package com.kalanco;
 
 import java.awt.*;
 
-public class Point {
+public class Point extends Figure{
     public double x;
     public double y;
     public Color color;
+
     public Point() {
         this.x = 0;
         this.y = 0;
@@ -17,9 +18,6 @@ public class Point {
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
-    }
-    public void setColor(Color c){
-        this.color = c;
     }
     public void move(double dx, double dy){
         this.x += dx;
